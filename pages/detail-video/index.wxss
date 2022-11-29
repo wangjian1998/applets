@@ -1,0 +1,87 @@
+/* pages/detail-video/index.wxss */
+.detail-video {
+  width: 100%;
+  height: 1300rpx;
+}
+.mvName {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mvAuthor, .duration {
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #ada9a9;
+}
+
+.detail-content {
+  padding: 10px;
+  height: 70%;
+  overflow: auto;
+}
+
+.relate {
+  margin-top: 20px;
+}
+.relate-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.relate-wrapper {
+  width: 100%;
+  /* display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; */
+}
+
+/* .album {
+  width: 40%;
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.album-image {
+  width: 100%;
+}
+
+.durationms {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.playMV {
+  width: 15px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 4px;
+}
+
+.relate-info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.info-author {
+  font-size: 12px;
+  color: rgb(116, 113, 113);
+} */
+
+
+
+
+
+

@@ -1,1 +1,49 @@
 /* pages/home-video/index.wxss */
+
+.video{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.video-wrapper {
+  width: 45%;
+  height: auto;
+  margin-bottom: 40rpx;
+}
+
+/* .album{
+  width:100%;
+  position: relative;
+}
+
+.info{
+  width: 98%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom:5px;
+  left: 0;
+  color:#e6e6e6;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.playMV{
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 3px;
+}
+
+.image{
+  width:100%;
+  border-radius: 3px;
+}
+
+.content{
+  font-size: 14px;
+} */

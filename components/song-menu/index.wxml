@@ -1,0 +1,26 @@
+<!--components/song-menu/index.wxml-->
+<wxs src="/utils/format.wxs" module="format"></wxs>
+<view>
+  <area-header title="{{title}}"></area-header>
+  <!-- <swiper class="swiper" 
+          style="height: {{swiperHeight}}px;" 
+          autoplay
+          circular>
+    <swiper-item class="swiper-item" wx:for="{{hotSongMenu}}" wx:key="id">
+    <view class="menu-image">
+      <image class="image" src="{{item.picUrl}}" mode="widthFix"></image>
+      <view class="playCount">{{format.formatCount(item.playCount)}}</view>
+    </view>
+      <view class="menu-name">{{item.name}}</view>
+    </swiper-item>
+  </swiper> -->
+  <scroll-view class="scroll-list" scroll-x >
+    <view class="scroll-item" wx:for="{{SongMenu}}" wx:key="id">
+      <view class="menu-image">
+        <image class="image" src="{{item.coverImgUrl}}" mode="widthFix"></image>
+        <view class="playCount">{{format.formatCount(item.playCount)}}</view>
+      </view>
+      <view class="menu-name">{{item.name}}</view>
+    </view>
+  </scroll-view>
+</view>

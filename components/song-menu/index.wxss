@@ -1,0 +1,71 @@
+/* components/song-menu/index.wxss */
+
+.swiper {
+  width: 100%;
+}
+.swiper-item {
+  width: 110px !important;
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+  border-radius: 10rpx;
+  overflow: hidden;
+  transform: translateY(0);
+}
+.menu-image {
+  display: block;
+  position: relative;
+  width: 100px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.menu-image .image {
+  width: 100%;
+}
+
+.playCount {
+  padding: 2px;
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  color: #fff;
+}
+
+.menu-name {
+  margin: auto;
+  font-size: 12px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -moz-box;
+  -moz-line-clamp: 2;
+  -moz-box-orient: vertical;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+  overflow: hidden;
+}
+
+.scroll-list {
+  width: 100vw;
+  position: relative;
+  margin-left: -10px;
+  white-space: nowrap;
+}
+
+.scroll-item {
+  width: 100px;
+  height: 100%;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.scroll-item:nth-last-child(1) {
+  margin-right: 10px;
+}

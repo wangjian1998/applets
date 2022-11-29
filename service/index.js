@@ -8,7 +8,7 @@ class WjRequest {
         method,
         data: params,
         success: function(res) {
-          return resolve(res)
+          return resolve(res.data)
         },
         fail: function(err) {
           return reject(err)

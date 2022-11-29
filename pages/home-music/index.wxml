@@ -1,3 +1,41 @@
 <!--pages/home-music/index.wxml-->
+<view>
+  <!-- 搜索框-->
+  <van-search disabled 
+              placeholder="搜索你喜欢的歌曲" 
+              background="#fafafa" 
+              shape="round"
+              bind:click-input="clickInput"/>
+  <!-- 轮播图-->
+  <swiper class="home-swiper"
+          indicator-dots
+          autoplay
+          circular
+          style="height: {{swiperHeight}}px">
+    <swiper-item class="swiper-item" 
+                wx:for="{{banners}}" 
+                wx:key="bannerId"
+                >
+      <image class="swiper-image"  src="{{item.pic}}" mode="widthFix" bindload="getImageHeight"></image>
+    </swiper-item>
+  </swiper>
+  <!--推荐歌曲-->
+  <view class="commond-music">
+    <area-header title="推荐歌曲" bind:click="handleClick"></area-header>
+    <view class="recommond-wrapper" wx:for="{{recommondList}}" wx:key="id">
+      <image class="recommondImage" src="{{item.picUrl}}" mode="widthFix"></image>
+      <view class="recommond-info">
+        <view class="recommond-name">{{item.name}}</view>
+        <text class="recommond-album-name">{{item.song.album.artists[0].name}}-{{item.song.album.name}}</text>
+      </view>
+      <image class="iconImage" src="/assets/images/icons/arrow-right.png" mode="widthFix"></image>
+    </view>
+  </view>
+
+  <!--热门歌单-->
+  <song-menu SongMenu='{{hotSongMenu}}' title="热门歌单"></song-menu>
+  <!--推荐歌单-->
+  <song-menu SongMenu='{{recommendSongMenuList}}' title="推荐歌单"></song-menu>
+</view>
 
 
