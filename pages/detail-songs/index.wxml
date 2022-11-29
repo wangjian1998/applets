@@ -3,13 +3,12 @@
     <area-header title="{{rankingInfo.name}}" showRight="{{false}}"></area-header>
   </block>
   <block wx:if="{{type === 'menu'}}">
-    <view>歌单数据</view>
+    <song-detail-header rankingInfo="{{rankingInfo}}"></song-detail-header>
   </block>
 
   <view class="song-list">
     <block wx:for="{{rankingInfo.tracks}}" wx:key="id">
       <song-list index='{{index + 1}}' itemData='{{item}}'></song-list>
-
     </block>
   </view>
 </view>
