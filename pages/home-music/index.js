@@ -103,9 +103,15 @@ Page({
     this.navigateToPage('recommendSongList')
   },
 
+  handleRankItem(e) {
+    const idx = e.currentTarget.dataset.idx
+    const MapToList = {0: 'newRankList', 2: 'orignRankList', 3: 'upRankList'}
+    this.navigateToPage(MapToList[idx])
+  },
+
   navigateToPage(pageName) {
     wx.navigateTo({
-      url: `/pages/detail-songs/index?ranging=${pageName}`,
+      url: `/pages/detail-songs/index?ranking=${pageName}`,
     })
   },
 
