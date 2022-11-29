@@ -24,20 +24,16 @@ const hyEventStore = new HYEventStore({
         getRankSongList(i.id).then(res => {
           switch(i.name) {
             case '飙升榜':
-              ctx.upRankList = res
-              console.log(res)
+              ctx.upRankList = res.playlist
               break;
             case '热歌榜':
-              ctx.upRankList = res
-              console.log(res)
+              ctx.rankList = res.playlist
               break;
             case '原创榜':
-              ctx.upRankList = res
-              console.log(res)
+              ctx.orignRankList = res.playlist
               break;
             case '新歌榜':
-              ctx.upRankList = res
-              console.log(res)
+              ctx.newRankList = res.playlist
               break;
           }
         })

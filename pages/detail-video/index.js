@@ -26,20 +26,16 @@ Page({
     // 获取mv播放地址
     getMvAddress(id).then(res => {
       this.setData({mvURL: res.data})
-      console.log(this.data.mvURL)
-      console.log(this.data.mvURL.url)
     })
 
     // 获取mv相关信息
     getMvDetail(id).then(res => {
       this.setData({mvDetail: res.data})
-      console.log(this.data.mvDetail)
     })
 
     // 获取相关联mv
     getMvRelate(id).then(res => {
       this.setData({mvRelate: res.data})
-      console.log(this.data.mvRelate)
     })
   },
 

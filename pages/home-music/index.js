@@ -15,7 +15,8 @@ Page({
     swiperHeight: 60,
     recommondList: [],
     hotSongMenu: [], // 热门歌单
-    recommendSongMenuList: []
+    recommendSongMenuList: [],
+    dianfengList: {0: {}, 2: {} ,3: {}} // 巅峰榜单
   },
 
   /**
@@ -25,18 +26,37 @@ Page({
    this.getPageData()
 
    // 请求数据
-   hyEventStore.dispatch("getRecommendSong")
+  hyEventStore.dispatch("getRecommendSong")
 
-  //  hyEventStore.dispatch("getDataRankingList")
+   hyEventStore.dispatch("getDataRankingList")
 
-   // 获取store中数据
+   // 获取store中数据(推荐歌曲)
    hyEventStore.onState('recommendSongList', res=> {
     //  console.log(res)
      if (!res.result) return
      const commondSongs = res.result.slice(0, 6)
      this.setData({recommondList: commondSongs})
    })
+
+   hyEventStore.onState('newRankList', this.getRankingHandler(0))
+   hyEventStore.onState('orignRankList', this.getRankingHandler(2))
+   hyEventStore.onState('upRankList', this.getRankingHandler(3))
   },
+
+  getRankingHandler(idx) {
+    return res => {
+      if (Object.keys(res).length === 0) return
+      const name = res.name
+      const coverImgUrl = res.coverImgUrl
+      const songList = res.tracks.slice(0,3)
+      const rankObj = {name, coverImgUrl, songList}
+      const newRankings = {...this.data.dianfengList, [idx]: rankObj}
+      this.setData({dianfengList: newRankings})
+      console.log(this.data.dianfengList)
+    }
+  },
+
+
 
   getPageData() {
     getBanner().then(res => {
@@ -51,9 +71,9 @@ Page({
       this.setData({recommendSongMenuList: res.playlists})
     })
 
-    getAllRankList().then(res => {
-      console.log(res)
-    })
+    // getAllRankList().then(res => {
+    //   console.log(res)
+    // })
   },
 
   /**

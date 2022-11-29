@@ -36,6 +36,11 @@
   <song-menu SongMenu='{{hotSongMenu}}' title="热门歌单"></song-menu>
   <!--推荐歌单-->
   <song-menu SongMenu='{{recommendSongMenuList}}' title="推荐歌单"></song-menu>
+
+  <!-- 巅峰榜-->
+  <view class="dianfeng">
+    <area-header title="巅峰榜" showRight='{{false}}'></area-header>
+  </view>
 </view>
 
 
