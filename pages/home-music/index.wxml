@@ -39,7 +39,7 @@
   <!-- 巅峰榜-->
   <view class="dianfeng">
     <area-header title="巅峰榜" showRight='{{false}}'></area-header>
-    <view class="list-wrapper" wx:if="{{dianfengList[3].playCount}}">
+    <view class="list-wrapper">
       <view class="list-item" wx:for="{{dianfengList}}" wx:key="index" bindtap="handleRankItem" data-idx='{{index}}'>
         <ranking-area-item itemData='{{item}}'></ranking-area-item>
       </view>

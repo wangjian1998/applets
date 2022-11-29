@@ -1,2 +1,9 @@
-<!--pages/detail-songs/index.wxml-->
-<text>pages/detail-songs/index.wxml</text>
+<view>
+  <area-header title="{{rankingInfo.name}}" showRight="{{false}}"></area-header>
+  <view class="song-list">
+    <block wx:for="{{rankingInfo.tracks}}" wx:key="id">
+      <song-list index='{{index + 1}}' itemData='{{item}}'></song-list>
+
+    </block>
+  </view>
+</view>
