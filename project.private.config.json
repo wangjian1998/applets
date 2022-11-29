@@ -28,6 +28,13 @@
           "query": "ranking=newRankList",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "id歌单详情",
+          "pathName": "pages/detail-songs/index",
+          "query": "id=7050074027&type=menu",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -1,4 +1,9 @@
 /* pages/detail-songs/index.wxss */
 page {
+  height: 100%;
+}
+.detail-song {
   padding: 0 20px;
+  height: 95%;
+  overflow: auto;
 }

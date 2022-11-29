@@ -21,6 +21,11 @@ export function getRecommendSongMenuList() {
   return request.get('/top/playlist', {limit: 10, offset: 0, cat: '华语'})
 }
 
+// 歌单详情
+export function getMenuDetail(id) {
+  return request.get('/playlist/detail/dynamic', {id})
+}
+
 // 所有榜单
 export function getAllRankList() {
   return request.get('/toplist')
