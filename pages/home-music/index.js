@@ -49,10 +49,10 @@ Page({
       const name = res.name
       const coverImgUrl = res.coverImgUrl
       const songList = res.tracks.slice(0,3)
-      const rankObj = {name, coverImgUrl, songList}
+      const playCount = res.playCount
+      const rankObj = {name, coverImgUrl, songList, playCount}
       const newRankings = {...this.data.dianfengList, [idx]: rankObj}
       this.setData({dianfengList: newRankings})
-      console.log(this.data.dianfengList)
     }
   },
 

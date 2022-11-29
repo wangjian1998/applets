@@ -1,0 +1,15 @@
+<wxs src="/utils/format.wxs" module="format"></wxs>
+<view class="item-list">
+  <view class="left">
+    <view class="title">{{itemData.name}}</view>
+    <view class="song-list">
+      <view class="song-item" wx:for="{{itemData.songList}}" wx:key="id">
+        <view class="song-name"> <text class="song-index">{{index+1}}. {{item.name}}</text> - {{item.ar[0].name}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="right">
+    <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" alt=""/>
+    <view class="playCount">{{format.formatCount(itemData.playCount)}}</view>
+  </view>
+</view>

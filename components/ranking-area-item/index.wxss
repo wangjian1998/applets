@@ -1,0 +1,57 @@
+/* components/ranking-area-item/index.wxss */
+
+.item-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 0;
+  background-color: rgb(250, 244, 244);
+}
+
+.left {
+  width: 70%;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.song-list {
+  width: 70%;
+}
+.song-name {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.song-index {
+  font-weight: 600;
+  
+}
+
+.right {
+  position: relative;
+  width: 30%;
+}
+
+.image {
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}
+
+.playCount {
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 5px;
+}
