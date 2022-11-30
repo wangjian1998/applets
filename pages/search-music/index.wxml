@@ -1,2 +1,12 @@
-<!--pages/search-music/index.wxml-->
-<text>pages/search-music/index.wxml</text>
+<view class="search-music">
+  <van-search background="#f7f7f7" shape='round'></van-search>
+  <view class="hot">
+    <area-header title="热门搜索" showRight="{{false}}"></area-header>
+    <view class="hot-list">
+      <view wx:for="{{hotData}}" wx:key="{{index}}" bindtap="changeIndex" data-idx="{{index}}" class="hot-item {{currentIndex === index ? 'active' : ''}}">
+        <text class="hot-name" >{{item.first}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+

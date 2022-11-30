@@ -1,1 +1,19 @@
 /* pages/search-music/index.wxss */
+.search-music {
+  padding: 0 10px;
+}
+
+.hot-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hot-item {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.active {
+  color: #26ce8a
+}
