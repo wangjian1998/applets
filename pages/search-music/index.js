@@ -1,13 +1,17 @@
 // pages/search-music/index.js
-import {getSearchHot} from '../../service/api_search'
+import {getSearchHot, getSearchSuggest} from '../../service/api_search'
+import debounce from '../../utils/debounce'
+const debounceSearchSuggest = debounce(getSearchSuggest)
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    hotData: [],
-    currentIndex: 0
+    hotData: [], // 热门搜索数据
+    currentIndex: 0, //当前索引
+    suggestSongs: [], // 建议歌曲
+    keywords: '' // 搜索关键字
   },
 
   /**
@@ -27,5 +31,18 @@ Page({
   changeIndex(e) {
     const idx = e.currentTarget.dataset.idx
     this.setData({currentIndex: idx})
+  },
+
+  handleSearch(data) {
+    const searchValue = data.detail
+    this.setData({keywords: searchValue})
+    if(! searchValue) {
+      this.setData({suggestSongs: []})
+      return
+    }
+    debounceSearchSuggest(searchValue).then(res => {
+      console.log(res)
+      this.setData({suggestSongs: res.result.allMatch})
+    })
   }
 })

@@ -17,3 +17,27 @@
 .active {
   color: #26ce8a
 }
+.search-result {
+  margin: 20px 0;
+}
+.search-keywords {
+  font-size: 18px;
+  font-weight: bold;
+  color: #26ce8a;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0;
+}
+.item .icon {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.item .search-name{
+  font-size: 32rpx;
+  font-weight: 700;
+}

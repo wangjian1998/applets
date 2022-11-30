@@ -1,11 +1,29 @@
 <view class="search-music">
-  <van-search background="#f7f7f7" shape='round'></van-search>
-  <view class="hot">
+  <van-search 
+    background="#f7f7f7" 
+    shape='round'
+    bind:change="handleSearch"></van-search>
+
+  <!--热门搜索数据-->
+  <view class="hot" wx:if="{{!keywords && !suggestSongs.length}}">
     <area-header title="热门搜索" showRight="{{false}}"></area-header>
     <view class="hot-list">
-      <view wx:for="{{hotData}}" wx:key="{{index}}" bindtap="changeIndex" data-idx="{{index}}" class="hot-item {{currentIndex === index ? 'active' : ''}}">
+      <view wx:for="{{hotData}}" wx:key="index" bindtap="changeIndex" data-idx="{{index}}" class="hot-item {{currentIndex === index ? 'active' : ''}}">
         <text class="hot-name" >{{item.first}}</text>
       </view>
+    </view>
+  </view>
+  
+  <!-- 建议搜索 -->
+  <view class="search-result" wx:else>
+    <text class="search-keywords">搜索“{{keywords}}”</text>
+    <view class="list">
+      <block wx:for="{{suggestSongs}}" wx:key="keyword">
+        <view class="item">
+          <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
+          <text class="search-name">{{item.keyword}}</text>
+        </view>
+      </block>
     </view>
   </view>
 </view>
