@@ -2,30 +2,45 @@
   <van-search 
     background="#f7f7f7" 
     shape='round'
-    bind:change="handleSearch"></van-search>
+    value='{{keywords}}'
+    bind:change="handleSearch"
+    bind:search="handleSearchAction"></van-search>
 
   <!--热门搜索数据-->
   <view class="hot" wx:if="{{!keywords && !suggestSongs.length}}">
     <area-header title="热门搜索" showRight="{{false}}"></area-header>
     <view class="hot-list">
       <view wx:for="{{hotData}}" wx:key="index" bindtap="changeIndex" data-idx="{{index}}" class="hot-item {{currentIndex === index ? 'active' : ''}}">
-        <text class="hot-name" >{{item.first}}</text>
+        <text class="hot-name" bindtap="handleItemSearch" data-keyword="{{item.first}}">{{item.first}}</text>
       </view>
     </view>
   </view>
 
   <!-- 建议搜索 -->
-  <view class="search-result" wx:else>
+  <view class="search-result" wx:elif="{{suggestSongs.length && !resultSongs.length}}">
     <text class="search-keywords">搜索“{{keywords}}”</text>
     <view class="list">
-      <block wx:for="{{suggestSongsNodes}}" wx:key="keyword">
-        <view class="item">
+      <block wx:for="{{suggestSongs}}" wx:key="keyword">
+        <view class="item" bindtap="handleItemSearch" data-keyword="{{item.keyword}}">
           <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
           <!-- <text class="search-name">{{item.keyword}}</text> -->
-          <rich-text nodes='{{item}}'></rich-text>
+          <rich-text nodes='{{suggestSongsNodes[index]}}'></rich-text>
         </view>
       </block>
     </view>
   </view>
+
+  <!--搜索结果-->
+  <view class="search-result" wx:else>
+    <view class="list">
+      <block wx:for="{{resultSongs}}" wx:key="id">
+        <view class="item">
+          <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
+          <text class="search-name">{{item.name}} —— {{item.artists[0].name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  
 </view>
 

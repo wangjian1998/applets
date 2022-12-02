@@ -38,6 +38,6 @@
 }
 
 .item .search-name{
-  font-size: 32rpx;
+  font-size: 14px;
   font-weight: 700;
 }

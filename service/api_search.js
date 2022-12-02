@@ -7,3 +7,7 @@ export function getSearchHot() {
 export function getSearchSuggest(keywords) {
   return request.get('/search/suggest', {type: 'mobile', keywords})
 }
+
+export function getSearchSong(keywords) {
+  return request.get('/search', {keywords})
+}
