@@ -1,4 +1,12 @@
 <view class="music-player">
   <image class="bg-image" mode="aspectFill" src="{{playData.picUrl}}"></image>
   <view class="bg-cover"></view>
+
+  <nav-bar>
+    <view slot="center">
+      <text>歌曲</text>
+      <text>歌词</text>
+    </view>
+  </nav-bar>
+
 </view>

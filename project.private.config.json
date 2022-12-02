@@ -46,7 +46,7 @@
         {
           "name": "播放页面",
           "pathName": "pages/music-player/index",
-          "query": "id=2002392556",
+          "query": "id=2002392556&name=TOUCH&picUrl=%2522http%253A%252F%252Fp1.music.126.net%252FY_tQBwiNBscG9Tk-Vx-6HA%253D%253D%252F109951168099454507.jpg%2522&artists=NAQT%20VANE&album=TOUCH",
           "launchMode": "default",
           "scene": null
         }
