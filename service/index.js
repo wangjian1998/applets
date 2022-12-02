@@ -1,5 +1,6 @@
 
 const BASE_URL = 'http://123.207.32.32:9001'
+// const BASE_URL = 'http://43.138.177.191:3000'
 class WjRequest {
   request(url, method, params) {
     return new Promise((resolve, reject) => {

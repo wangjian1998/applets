@@ -6,19 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    playData: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    const {id} = options
-    console.log(id)
-    getSongDetail(id).then(res=> {
-      console.log(res)
-    })
+  async onLoad(options) {
+    const {id, name, artists, album} = options
+    const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
+    const detailData = await getSongDetail(id)
+    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}})
+    console.log(this.data.playData)
   },
+
+
 
   
   /**

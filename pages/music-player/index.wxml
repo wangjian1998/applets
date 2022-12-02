@@ -1,2 +1,4 @@
-<!--pages/music-player/index.wxml-->
-<text>pages/music-player/index.wxml</text>
+<view class="music-player">
+  <image class="bg-image" mode="aspectFill" src="{{playData.picUrl}}"></image>
+  <view class="bg-cover"></view>
+</view>

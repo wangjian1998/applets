@@ -118,9 +118,15 @@ Page({
 
   //跳转到播放歌曲页
   handleSongItemClick(e) {
-    const id = e.currentTarget.dataset.item.id
+    const item = e.currentTarget.dataset.item
+    const {id, name} = item
+    // const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
+    const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
+    const artists = item.song.artists.map(item => item.name).join(',')
+    const album = item.song.album.name
+    console.log(item)
     wx.navigateTo({
-      url: `/pages/music-player/index?id=${id}`,
+      url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
     })
   },
 
