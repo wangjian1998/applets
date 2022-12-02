@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    playData: {}
+    playData: {},
+    currentPage: 0,
+    contentHeight: 0 // 页面swiper高度
   },
 
   /**
@@ -18,6 +20,21 @@ Page({
     const detailData = await getSongDetail(id)
     this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}})
     console.log(this.data.playData)
+
+    // 动态计算swiper高度
+    const {statusBarHeight, screenHeight} = wx.getSystemInfoSync()
+    this.setData({contentHeight: screenHeight - statusBarHeight -44})
+  },
+
+  onBack() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  handleChange(e) {
+    console.log(e)
+    this.setData({currentPage: e.detail.current})
   },
 
 

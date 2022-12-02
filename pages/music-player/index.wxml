@@ -2,11 +2,17 @@
   <image class="bg-image" mode="aspectFill" src="{{playData.picUrl}}"></image>
   <view class="bg-cover"></view>
 
-  <nav-bar>
-    <view slot="center">
-      <text>歌曲</text>
-      <text>歌词</text>
+  <nav-bar bind:click="onBack">
+    <view slot="center" class="center-slot">
+      <view class="{{currentPage === 0 ? 'active' : ''}}">歌曲</view>
+      <view class="divider">|</view>
+      <view class="{{currentPage === 1 ? 'active' : ''}}">歌词</view>
     </view>
   </nav-bar>
+
+  <swiper style="height: {{contentHeight}}px;" bindchange="handleChange">
+    <swiper-item>1</swiper-item>
+    <swiper-item>2</swiper-item>
+  </swiper>
 
 </view>
