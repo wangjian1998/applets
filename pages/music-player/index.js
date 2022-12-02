@@ -24,6 +24,11 @@ Page({
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight} = wx.getSystemInfoSync()
     this.setData({contentHeight: screenHeight - statusBarHeight -44})
+
+    // 创建播放器
+    const audioContext = wx.createInnerAudioContext()
+    audioContext.src = this.data.playData.detailData[0].url
+    audioContext.play()
   },
 
   onBack() {

@@ -10,8 +10,34 @@
     </view>
   </nav-bar>
 
-  <swiper style="height: {{contentHeight}}px;" bindchange="handleChange">
-    <swiper-item>1</swiper-item>
+  <swiper style="height: {{contentHeight}}px;" bindchange="handleChange" class="content">
+    <swiper-item class="music">
+      <view class="album">
+      <image src="{{playData.picUrl}}" mode="widthFix" class="image"></image>
+      </view>
+      <view class="info">
+        <view class="title">{{playData.name}}</view>
+        <view class="subtitle">
+          <view class="singer">{{playData.artists}}</view>
+          <view class="alias">专辑： 《{{playData.album}}》</view>
+        </view>
+      </view>
+      <view class="lyric">我是歌词，哈哈哈</view>
+      <view class="progress">
+        <slider block-size="{{12}}"></slider>
+        <view class="time">
+          <view class="current">01:22</view>
+          <view class="totle">04:34</view>
+        </view>
+      </view>
+      <view class="operation">
+        <image class="btn btn-mode" src="/assets/images/player/play_order.png"></image>
+        <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
+        <image class="btn btn-pause" src="/assets/images/player/play_pause.png"></image>
+        <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
+        <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
+      </view>
+    </swiper-item>
     <swiper-item>2</swiper-item>
   </swiper>
 
