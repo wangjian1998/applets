@@ -38,12 +38,13 @@ Page({
   handleSearch(data) {
     const searchValue = data.detail
     this.setData({keywords: searchValue})
-    if(! searchValue) {
+    this.setData({resultSongs: []})
+    if(!searchValue.length) {
       this.setData({suggestSongs: []})
+      debounceSearchSuggest.cancel()
       return
     }
     debounceSearchSuggest(searchValue).then(res => {
-      console.log(res)
       this.setData({suggestSongs: res.result.allMatch})
 
        //转成富文本nodes节点
@@ -74,7 +75,6 @@ Page({
           }
           nodes.push(node)
          }
-         console.log(nodes)
          suggestSongsNodes.push(nodes)
          
        }

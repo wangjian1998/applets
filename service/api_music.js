@@ -38,3 +38,15 @@ export function getAllRankList() {
 export function getRankSongList(id) {
   return request.get('/playlist/detail', {id})
 }
+
+/**
+ * 获取每个榜单中的歌曲
+ * @param {ids} id 歌曲ids
+ */
+// export function getSongDetail(ids) {
+//   return request.get('/song/detail', {ids})
+// }
+export function getSongDetail(id) {
+  return request.get('/song/url/v1', {id})
+}
+

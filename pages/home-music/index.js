@@ -116,6 +116,14 @@ Page({
     })
   },
 
+  //跳转到播放歌曲页
+  handleSongItemClick(e) {
+    const id = e.currentTarget.dataset.item.id
+    wx.navigateTo({
+      url: `/pages/music-player/index?id=${id}`,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面卸载
    */

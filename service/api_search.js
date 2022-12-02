@@ -11,3 +11,4 @@ export function getSearchSuggest(keywords) {
 export function getSearchSong(keywords) {
   return request.get('/search', {keywords})
 }
+
