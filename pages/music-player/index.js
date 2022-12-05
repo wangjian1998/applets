@@ -1,6 +1,7 @@
 // pages/music-player/index.js
 import {getSongDetail, getLyric} from '../../service/api_music'
 import {audioContext} from '../../store/play-music'
+import {parseLyric} from '../../utils/parseLyric'
 Page({
 
   /**
@@ -14,23 +15,28 @@ Page({
     currentTime: 0, // 播放的当前时间
     sliderValue: 0,
     isPause: false, // 是否暂停
-    isChanging: false // 是否正在滑动
+    isChanging: false, // 是否正在滑动
+    currentLyricInfo: '' // 当前歌词
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+    // 获取传递过来的信息
     const {id, name, artists, album} = options
     const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
     const detailData = await getSongDetail(id)
-    const songLyric = await getLyric(id) // 获取歌词
-    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric: songLyric.lrc.lyric})
+    // 获取歌词
+    const songLyric = await getLyric(id) 
+    const lyric = parseLyric(songLyric.lrc.lyric)
+    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric})
+    console.log(this.data.lyric)
+    console.log(songLyric)
 
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight, screenWidth} = wx.getSystemInfoSync()
     const deviceRadio = screenHeight / screenWidth
-    console.log(deviceRadio)
     this.setData({contentHeight: screenHeight - statusBarHeight -44, isShowLyric: deviceRadio >=2})
 
     // 播放歌曲
@@ -43,10 +49,23 @@ Page({
     })
 
     audioContext.onTimeUpdate(() => {
+      // 获取当前时间
+      const currentTime = audioContext.currentTime*1000
+      // 根据当前时间修改currentTime与sliderTime
       if (!this.data.isChanging) {
-        const currentTime = audioContext.currentTime*1000
         const sliderValue = currentTime / this.data.playData.detailData[0].time * 100
         this.setData({currentTime, sliderValue})
+      }
+      // 根据当前时间去查找播放的歌词
+      for (let i=0;i<this.data.lyric.length;i++) {
+        const lyricInfo = this.data.lyric[i]
+        if (currentTime < lyricInfo.time) {
+          const currentIndex = i -1
+          const currentLyricInfo = this.data.lyric[currentIndex]
+          this.setData({currentLyricInfo: currentLyricInfo.lyricText})
+          console.log(currentLyricInfo)
+          break
+        }
       }
     })
   },
@@ -57,11 +76,12 @@ Page({
     })
   },
 
+  // swiper事件处理
   handleChange(e) {
-    console.log(e)
     this.setData({currentPage: e.detail.current})
   },
 
+  // slider滑动事件处理
   handleSliderChange(e) {
     // 获取slider变化值
     const value = e.detail.value
@@ -74,6 +94,7 @@ Page({
     this.setData({sliderValue: value, isChanging: false})
   },
 
+  // slider滑动时事件处理
   handleSliderChanging(e) {
     console.log(e)
     const currentTime =  this.data.playData.detailData[0].time * e.detail.value / 100
@@ -85,7 +106,7 @@ Page({
     this.setData({isPause: true})
     audioContext.pause()
   },
-
+  // 继续播放音乐
   resumeMusic() {
     this.setData({isPause: false})
     audioContext.seek(this.data.currentTime / 1000)

@@ -23,7 +23,7 @@
           <view class="alias">专辑： 《{{playData.album}}》</view>
         </view>
       </view>
-      <view class="lyric" wx:if="{{isShowLyric}}">我是歌词，哈哈哈</view>
+      <view class="lyric" wx:if="{{isShowLyric}}">{{currentLyricInfo}}</view>
       <view class="progress">
         <slider value="{{sliderValue}}" bindchange="handleSliderChange"  bindchanging="handleSliderChanging" block-size="{{12}}"></slider>
         <view class="time">
