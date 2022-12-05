@@ -40,7 +40,7 @@
         <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
       </view>
     </swiper-item>
-    <swiper-item>2</swiper-item>
+    <swiper-item>{{lyric}}</swiper-item>
   </swiper>
 
 </view>

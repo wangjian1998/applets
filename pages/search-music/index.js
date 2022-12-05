@@ -95,4 +95,18 @@ Page({
     })
   },
 
+  // 播放音乐
+  playMusic(e) {
+    const item = e.currentTarget.dataset.item
+    const {id, name} = item
+    // const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
+    const picUrl = encodeURIComponent(JSON.stringify( item.album.artist.picUrl||item.album.artist.img1v1Url))
+    const artists = item.artists.map(item => item.name).join(',')
+    const album = item.album.name
+    console.log(item)
+    wx.navigateTo({
+      url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
+    })
+  }
+
 })

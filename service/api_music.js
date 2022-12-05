@@ -50,3 +50,13 @@ export function getSongDetail(id) {
   return request.get('/song/url/v1', {id})
 }
 
+
+/**
+ * 获取歌词
+ * @param {number} id 歌曲id
+ */
+export function getLyric(id) {
+  return request.get('/lyric', {id})
+}
+
+

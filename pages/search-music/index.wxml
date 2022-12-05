@@ -37,7 +37,7 @@
         <view class="list">
           <text class="search-keywords" wx:if="{{resultSongs.length}}">最近匹配</text>
           <block wx:for="{{resultSongs}}" wx:key="id">
-            <view class="result-item">
+            <view class="result-item" bindtap="playMusic" data-item="{{item}}">
               <view>{{index+1}}.</view>
                 <view class="info">
                   <view class="name">{{item.name}}</view>

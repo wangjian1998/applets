@@ -1,5 +1,5 @@
 // pages/music-player/index.js
-import {getSongDetail} from '../../service/api_music'
+import {getSongDetail, getLyric} from '../../service/api_music'
 import {audioContext} from '../../store/play-music'
 Page({
 
@@ -22,11 +22,10 @@ Page({
    */
   async onLoad(options) {
     const {id, name, artists, album} = options
-    // const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
-    const picUrl = 'http://p1.music.126.net/3OWbvJR4kAx9JCVFMlS4cQ==/109951168111317187.jpg'
+    const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
     const detailData = await getSongDetail(id)
-    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}})
-    console.log(this.data.playData)
+    const songLyric = await getLyric(id) // 获取歌词
+    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric: songLyric.lrc.lyric})
 
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight, screenWidth} = wx.getSystemInfoSync()
