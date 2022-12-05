@@ -1,3 +1,4 @@
+<wxs src="../../utils/format.wxs" module="format"></wxs>
 <view class="music-player">
   <image class="bg-image" mode="aspectFill" src="{{playData.picUrl}}"></image>
   <view class="bg-cover"></view>
@@ -22,12 +23,12 @@
           <view class="alias">专辑： 《{{playData.album}}》</view>
         </view>
       </view>
-      <view class="lyric">我是歌词，哈哈哈</view>
+      <view class="lyric" wx:if="{{isShowLyric}}">我是歌词，哈哈哈</view>
       <view class="progress">
         <slider block-size="{{12}}"></slider>
         <view class="time">
           <view class="current">01:22</view>
-          <view class="totle">04:34</view>
+          <view class="totle">{{format.formatTime(playData.detailData[0].time)}}</view>
         </view>
       </view>
       <view class="operation">
