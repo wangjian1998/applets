@@ -40,7 +40,16 @@
         <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
       </view>
     </swiper-item>
-    <swiper-item>{{lyric}}</swiper-item>
+    <swiper-item>
+    <scroll-view class="lyric-list" scroll-y scroll-top="{{lyricTop}}" scroll-with-animation>
+      <block wx:for="{{lyric}}" wx:key="index">
+        <view class="item {{currentIndex === index ? 'active' : ''}}"
+              style="padding-top: {{index === 0 ? (contentHeight/2 - 80) : 0}}px;padding-bottom: {{index === lyric.length - 1 ? (contentHeight/2) : 0}}px;">
+          {{item.lyricText}}
+        </view>
+      </block>
+    </scroll-view>
+    </swiper-item>
   </swiper>
 
 </view>

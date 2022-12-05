@@ -16,7 +16,9 @@ Page({
     sliderValue: 0,
     isPause: false, // 是否暂停
     isChanging: false, // 是否正在滑动
-    currentLyricInfo: '' // 当前歌词
+    currentLyricInfo: '', // 当前歌词
+    currentIndex: -1, //当前歌词索引
+    lyricTop: 0 // 歌词滚动距离  
   },
 
   /**
@@ -31,8 +33,6 @@ Page({
     const songLyric = await getLyric(id) 
     const lyric = parseLyric(songLyric.lrc.lyric)
     this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric})
-    console.log(this.data.lyric)
-    console.log(songLyric)
 
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight, screenWidth} = wx.getSystemInfoSync()
@@ -62,8 +62,8 @@ Page({
         if (currentTime < lyricInfo.time) {
           const currentIndex = i -1
           const currentLyricInfo = this.data.lyric[currentIndex]
-          this.setData({currentLyricInfo: currentLyricInfo.lyricText})
-          console.log(currentLyricInfo)
+          this.setData({currentLyricInfo: currentLyricInfo.lyricText, currentIndex, lyricTop: currentIndex* 35})
+          // console.log(currentLyricInfo)
           break
         }
       }
@@ -96,7 +96,6 @@ Page({
 
   // slider滑动时事件处理
   handleSliderChanging(e) {
-    console.log(e)
     const currentTime =  this.data.playData.detailData[0].time * e.detail.value / 100
     this.setData({isChanging: true, currentTime})
   },
