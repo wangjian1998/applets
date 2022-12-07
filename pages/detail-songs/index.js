@@ -43,7 +43,6 @@ Page({
 
   getData: function(res) {
     this.setData({rankingInfo: res})
-    console.log(this.data.rankingInfo)
   }
 
 })

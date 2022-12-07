@@ -1,4 +1,5 @@
 // components/song-list/index.js
+import {playStore} from '../../store/index'
 Component({
   /**
    * 组件的属性列表
@@ -37,6 +38,9 @@ Component({
       wx.navigateTo({
         url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
       })
+
+      // 请求歌曲数据和其他操作
+    playStore.dispatch("playMusicSongIDAction", {id, name,picUrl,artists,album})
     }
   }
 })

@@ -2,6 +2,7 @@
 import {getSongDetail, getLyric} from '../../service/api_music'
 import {audioContext} from '../../store/play-music'
 import {parseLyric} from '../../utils/parseLyric'
+import {playStore} from '../../store/index'
 Page({
 
   /**
@@ -10,6 +11,7 @@ Page({
   data: {
     isShowLyric: true, // 是否显示歌词(当屏幕宽高比大于2时，显示歌词)
     playData: {},
+    lyric: [], //歌词信息
     currentPage: 0,
     contentHeight: 0, // 页面swiper高度
     currentTime: 0, // 播放的当前时间
@@ -26,13 +28,14 @@ Page({
    */
   async onLoad(options) {
     // 获取传递过来的信息
-    const {id, name, artists, album} = options
-    const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
-    const detailData = await getSongDetail(id)
-    // 获取歌词
-    const songLyric = await getLyric(id) 
-    const lyric = parseLyric(songLyric.lrc.lyric)
-    this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric})
+    // const {id, name, artists, album} = options
+    // const picUrl = JSON.parse(decodeURIComponent(options.picUrl))
+    // const detailData = await getSongDetail(id)
+    // // 获取歌词
+    // const songLyric = await getLyric(id) 
+    // const lyric = parseLyric(songLyric.lrc.lyric)
+    // this.setData({playData: {id, name, picUrl,artists,album, detailData: detailData.data}, lyric})
+    this.setupPlayStoreListener()
 
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight, screenWidth} = wx.getSystemInfoSync()
@@ -41,7 +44,7 @@ Page({
 
     // 播放歌曲
     audioContext.stop()
-    audioContext.src = this.data.playData.detailData[0].url
+    // audioContext.src = this.data.playData.detailData[0].url
     // audioContext.play()
     audioContext.autoplay = true // 自动播放
     audioContext.onCanplay(() => { // 准备好后进行播放
@@ -112,6 +115,13 @@ Page({
   },
 
 
+
+    setupPlayStoreListener() {
+      playStore.onStates(['playData','lyric'], ({playData, lyric}) => {
+        if (playData) this.setData({playData})
+        if (lyric) this.setData({lyric})
+      })
+    },
 
   
   /**

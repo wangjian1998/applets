@@ -1,6 +1,7 @@
 // pages/search-music/index.js
 import {getSearchHot, getSearchSuggest, getSearchSong} from '../../service/api_search'
 import debounce from '../../utils/debounce'
+import {playStore} from '../../store/index'
 const debounceSearchSuggest = debounce(getSearchSuggest)
 Page({
 
@@ -107,6 +108,11 @@ Page({
     wx.navigateTo({
       url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
     })
+
+    // 请求歌曲数据和其他操作
+    playStore.dispatch("playMusicSongIDAction", {id, name,picUrl,artists,album})
+
+
   }
 
 })

@@ -1,5 +1,5 @@
 // pages/home-music/index.js
-import {hyEventStore} from '../../store/index'
+import {hyEventStore, playStore} from '../../store/index'
 import {getBanner, getHotSongMenuList, getRecommendSongMenuList, getAllRankList} from '../../service/api_music'
 import getBannerHeight from '../../utils/select-rect'
 import throttle from '../../utils/throttle'
@@ -124,10 +124,12 @@ Page({
     const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
     const artists = item.song.artists.map(item => item.name).join(',')
     const album = item.song.album.name
-    console.log(item)
+    // console.log(item)
     wx.navigateTo({
       url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
     })
+    // 请求歌曲数据和其他操作
+    playStore.dispatch("playMusicSongIDAction", {id, name,picUrl,artists,album})
   },
 
   /**
