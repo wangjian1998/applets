@@ -1,4 +1,4 @@
-<view class="item" bindtap="handleClick" data-item="{{itemData}}">
+<view class="item">
   <view>{{index}}</view>
   <view class="info">
     <view class="name">{{itemData.name}}</view>

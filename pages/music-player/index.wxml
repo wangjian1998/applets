@@ -32,11 +32,10 @@
         </view>
       </view>
       <view class="operation">
-        <image class="btn btn-mode" src="/assets/images/player/play_order.png"></image>
-        <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
-        <image wx:if="{{!isPause}}" bindtap="pauseMusic" class="btn btn-pause" src="/assets/images/player/play_pause.png"></image>
-        <image wx:if="{{isPause}}" bindtap="resumeMusic" class="btn btn-pause" src="/assets/images/player/play_resume.png"></image>
-        <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
+        <image class="btn btn-mode" bindtap="handleModeClick" src="{{playModeIndex === 0 ?'/assets/images/player/play_order.png' : playModeIndex === 1 ? '/assets/images/player/play_repeat.png' : '/assets/images/player/play_random.png'}}"></image>
+        <image class="btn btn-prev" bindtap="handleClickNext" data-bool="{{false}}" src="/assets/images/player/play_prev.png"></image>
+        <image bindtap="pauseMusic" class="btn btn-pause" src="{{!isPause ? '/assets/images/player/play_pause.png' : '/assets/images/player/play_resume.png'}}"></image>
+        <image class="btn btn-next" bindtap="handleClickNext" data-bool="{{true}}" src="/assets/images/player/play_next.png"></image>
         <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
       </view>
     </swiper-item>

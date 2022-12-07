@@ -1,5 +1,5 @@
 // pages/detail-songs/index.js
-import {hyEventStore} from '../../store/index'
+import {hyEventStore, playStore} from '../../store/index'
 import {getMenuDetail} from '../../service/api_music'
 Page({
 
@@ -25,12 +25,41 @@ Page({
     } else if (type === 'menu') {
       const {id} = options
       getMenuDetail(id).then(res => {
-        console.log(res)
         this.setData({rankingInfo: res.playlist})
       })
     }
   
   },
+
+  // ===========事件处理==============
+
+  getData: function(res) {
+    this.setData({rankingInfo: res})
+  },
+
+
+  handleClick(e) {
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+    const playList = this.data.rankingInfo.tracks.map(item => {
+      return {
+        id: item.id, 
+        name: item.name, 
+        picUrl: encodeURIComponent(JSON.stringify(item.al.picUrl)), 
+        artists: item.ar.map(artist => artist.name).join(', '), 
+        album: item.al.name
+      }
+    })
+    wx.navigateTo({
+      url: `/pages/music-player/index`,
+    })
+
+    // 请求歌曲数据和其他操作
+  playStore.dispatch("playMusicSongIDAction", playList[index])
+    // 设置播放列表
+  playStore.dispatch("playListAction", {list: playList, index})
+  },
+
 
   /**
    * 生命周期函数--监听页面卸载
@@ -41,8 +70,6 @@ Page({
     }
   },
 
-  getData: function(res) {
-    this.setData({rankingInfo: res})
-  }
+
 
 })

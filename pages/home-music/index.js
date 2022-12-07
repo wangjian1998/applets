@@ -4,7 +4,7 @@ import {getBanner, getHotSongMenuList, getRecommendSongMenuList, getAllRankList}
 import getBannerHeight from '../../utils/select-rect'
 import throttle from '../../utils/throttle'
 
-const throttleRueryRect = throttle(getBannerHeight)
+const throttleRueryRect = throttle(getBannerHeight, 1000, {trailing: true})
 Page({
 
   /**
@@ -65,7 +65,6 @@ Page({
 
     getHotSongMenuList().then(res => {
       this.setData({hotSongMenu: res.playlists})
-      console.log(res.playlists)
     })
 
     getRecommendSongMenuList().then(res => {
@@ -118,18 +117,23 @@ Page({
 
   //跳转到播放歌曲页
   handleSongItemClick(e) {
-    const item = e.currentTarget.dataset.item
-    const {id, name} = item
-    // const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
-    const picUrl = encodeURIComponent(JSON.stringify(item.picUrl))
-    const artists = item.song.artists.map(item => item.name).join(',')
-    const album = item.song.album.name
-    // console.log(item)
+    // const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+    const playList = this.data.recommondList.map(item => {
+      return {
+        id: item.id, 
+        name: item.name, 
+        picUrl: encodeURIComponent(JSON.stringify(item.picUrl)), 
+        artists: item.song.artists.map(artist => artist.name).join(','), 
+        album: item.song.album.name
+      }
+    })
     wx.navigateTo({
-      url: `/pages/music-player/index?id=${id}&name=${name}&picUrl=${picUrl}&artists=${artists}&album=${album}`,
+      url: `/pages/music-player/index`,
     })
     // 请求歌曲数据和其他操作
-    playStore.dispatch("playMusicSongIDAction", {id, name,picUrl,artists,album})
+    playStore.dispatch("playMusicSongIDAction", playList[index])
+    playStore.dispatch("playListAction", {list: playList, index})
   },
 
   /**

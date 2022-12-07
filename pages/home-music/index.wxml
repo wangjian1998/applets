@@ -22,7 +22,7 @@
   <!--推荐歌曲-->
   <view class="commond-music">
     <area-header title="推荐歌曲" bind:click="handleClick"></area-header>
-    <view class="recommond-wrapper" wx:for="{{recommondList}}" wx:key="id" data-item="{{item}}" bindtap="handleSongItemClick">
+    <view class="recommond-wrapper" wx:for="{{recommondList}}" wx:key="id" data-index="{{index}}" data-item="{{item}}" bindtap="handleSongItemClick">
       <image class="recommondImage" src="{{item.picUrl}}" mode="widthFix"></image>
       <view class="recommond-info">
         <view class="recommond-name">{{item.name}}</view>
