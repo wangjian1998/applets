@@ -15,7 +15,8 @@ const playStore = new HYEventStore({
     playModeIndex: 0, //播放模式 0：循环；1：单曲；2：随机
     isPause: false, // 是否暂停
     playList: [], // 歌曲列表
-    currentMusicIndex: 0 // 当前歌曲在歌曲列表中的索引
+    currentMusicIndex: 0, // 当前歌曲在歌曲列表中的索引
+    isFirstPlay: true // 是否第一次播放
   },
   actions: {
     async playMusicSongIDAction(ctx, payload) {
@@ -39,20 +40,19 @@ const playStore = new HYEventStore({
       audioContext.src = ctx.playData.detailData[0].url
       audioContext.autoplay = true // 自动播放
       // 监听audiocontext的一些事件
-      this.dispatch('setupAudioContextListenerAction')
+      if (ctx.isFirstPlay) {
+        this.dispatch('setupAudioContextListenerAction')
+        ctx.isFirstPlay = false
+      }
 
-      // 歌曲结束后播放下一首
-      // audioContext.onEnded(()=> {
-      //   ctx.currentMusicIndex = ctx.currentMusicIndex + 1
-      //   if (ctx.currentMusicIndex === ctx.playList.length - 1) ctx.currentMusicIndex = 0
-      //   this.dispatch('playMusicSongIDAction', ctx.playList[ctx.currentMusicIndex])
-      // })
+
     },
 
     setupAudioContextListenerAction(ctx) {
       audioContext.onCanplay(() => { // 准备好后进行播放
         audioContext.play()
       })
+      // 监听时间改变
       audioContext.onTimeUpdate(() => {
         // 获取当前时间
         const currentTime = audioContext.currentTime*1000
@@ -69,11 +69,17 @@ const playStore = new HYEventStore({
           }
         }
       })
+
+      // 监听歌曲播放完成
+      audioContext.onEnded(()=> {
+        this.dispatch('changeNewMusicAction', true)
+      })
     },
 
     // 更改播放模式
     changePlayModeIndexAction(ctx, index) {
       ctx.playModeIndex = index
+      console.log(ctx.playModeIndex)
     },
 
     // 歌曲暂停与继续播放
@@ -85,6 +91,23 @@ const playStore = new HYEventStore({
     playListAction(ctx, {list, index}) {
       ctx.playList = list
       ctx.currentMusicIndex = index
+    },
+    changeNewMusicAction(ctx, isNext) {
+      let index = ctx.currentMusicIndex
+      switch(ctx.playModeIndex) {
+        case 0:  // 循环播放
+          index = isNext ? index + 1 : index - 1
+          if (index === ctx.playList.length) index = 0
+          if (index === -1 ) index = ctx.playList.length - 1
+          break
+        case 1: // 单曲
+          break
+        case 2: //随机
+          index = Math.floor(Math.random() * ctx.playList.length)
+      }
+      ctx.currentMusicIndex = index
+      this.dispatch('playMusicSongIDAction', ctx.playList[index])
+      
     }
 
 

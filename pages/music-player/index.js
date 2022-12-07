@@ -49,18 +49,19 @@ Page({
   // 上一首/下一首
   handleClickNext(e) {
     const isNext = e.currentTarget.dataset.bool
-    let index = this.data.currentMusicIndex
-    if (isNext && this.data.playModeIndex !== 1) {
-      index = index + 1
-      if (index === this.data.playList.length) index = 0
-    } else if(!isNext && this.data.playModeIndex !== 1) {
-      index = index - 1
-      if (index === -1 ) index = this.data.playList.length - 1
-    } else if(this.data.playModeIndex === 1) {
-      index = this.data.currentMusicIndex
-    }
-    playStore.dispatch('playMusicSongIDAction', this.data.playList[index])
-    playStore.setState('currentMusicIndex', index)
+    playStore.dispatch('changeNewMusicAction', isNext)
+    // let index = this.data.currentMusicIndex
+    // if (isNext && this.data.playModeIndex !== 1) {
+    //   index = index + 1
+    //   if (index === this.data.playList.length) index = 0
+    // } else if(!isNext && this.data.playModeIndex !== 1) {
+    //   index = index - 1
+    //   if (index === -1 ) index = this.data.playList.length - 1
+    // } else if(this.data.playModeIndex === 1) {
+    //   index = this.data.currentMusicIndex
+    // }
+    // playStore.dispatch('playMusicSongIDAction', this.data.playList[index])
+    // playStore.setState('currentMusicIndex', index)
   },
 
   // 音乐模式切换
@@ -68,6 +69,7 @@ Page({
     let index = this.data.playModeIndex + 1
     if(index > 2) index = 0
     playStore.dispatch('changePlayModeIndexAction', index)
+    console.log(index)
   },
 
   // swiper事件处理
@@ -132,11 +134,11 @@ Page({
       })
 
       // 监听歌曲列表以及索引变化
-      playStore.onStates(['playList', 'currentMusicIndex'], ({playList, currentMusicIndex}) => {
-        if (playList) this.setData({playList})
-        if (currentMusicIndex !== undefined) this.setData({currentMusicIndex})
-        console.log(this.data.currentMusicIndex)
-      })
+      // playStore.onStates(['playList', 'currentMusicIndex'], ({playList, currentMusicIndex}) => {
+      //   if (playList) this.setData({playList})
+      //   if (currentMusicIndex !== undefined) this.setData({currentMusicIndex})
+      //   console.log(this.data.currentMusicIndex)
+      // })
 
     },
 

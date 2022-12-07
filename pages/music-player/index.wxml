@@ -20,7 +20,7 @@
         <view class="title">{{playData.name}}</view>
         <view class="subtitle">
           <view class="singer">{{playData.artists}}</view>
-          <view class="alias">专辑： 《{{playData.album}}》</view>
+          <view wx:if="{{playData.album}}" class="alias">专辑：《{{playData.album}}》</view>
         </view>
       </view>
       <view class="lyric" wx:if="{{isShowLyric}}">{{currentLyricInfo}}</view>
