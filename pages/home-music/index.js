@@ -16,7 +16,9 @@ Page({
     recommondList: [],
     hotSongMenu: [], // 热门歌单
     recommendSongMenuList: [],
-    dianfengList: {0: {}, 2: {} ,3: {}} // 巅峰榜单
+    dianfengList: {0: {}, 2: {} ,3: {}}, // 巅峰榜单
+    currentSong: {}, // 当前播放歌曲
+    isPause: false
   },
 
   /**
@@ -24,6 +26,7 @@ Page({
    */
   onLoad(options) {
    this.getPageData()
+   this.getCurrentSongListener() // 监听当前播放歌曲
 
    // 请求数据
   hyEventStore.dispatch("getRecommendSong")
@@ -134,6 +137,28 @@ Page({
     // 请求歌曲数据和其他操作
     playStore.dispatch("playMusicSongIDAction", playList[index])
     playStore.dispatch("playListAction", {list: playList, index})
+  },
+
+    // 跳转到播放页
+  handlePlayBarClick() {
+    wx.navigateTo({
+      url: '/pages/music-player/index'
+    })
+  },
+
+  handlePlayBtn() {
+    playStore.dispatch('changePauseMusicAction', !this.data.isPause)
+  },
+
+  // ====================事件监听==============
+  getCurrentSongListener() {
+    playStore.onState('playData', res => {
+      this.setData({currentSong: res})
+    })
+
+    playStore.onState('isPause', res => {
+      this.setData({isPause: res})
+    })
   },
 
   /**

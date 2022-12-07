@@ -45,6 +45,18 @@
       </view>
     </view>
   </view>
+
+  <!--播放工具栏-->
+  <view class="play-bar" bindtap="handlePlayBarClick">
+    <view class="left">
+      <image class="album" mode="aspectFill" src="{{currentSong.picUrl}}"></image>
+      <view class="name">{{currentSong.name}}</view>
+    </view>
+    <view class="right">
+      <image class="icon play" catchtap="handlePlayBtn" src="{{isPause ? '/assets/images/music/play_icon.png' : '/assets/images/music/pause_icon.png'}}"></image>
+      <image class="icon playlist" src="/assets/images/music/playlist_icon.png"></image>
+    </view>
+  </view>
 </view>
 
 

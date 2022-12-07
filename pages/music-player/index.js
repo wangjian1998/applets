@@ -32,6 +32,7 @@ Page({
   async onLoad(options) {
     // 监听store中的事件
     this.setupPlayStoreListener()
+    
 
     // 动态计算swiper高度
     const {statusBarHeight, screenHeight, screenWidth} = wx.getSystemInfoSync()
@@ -50,18 +51,6 @@ Page({
   handleClickNext(e) {
     const isNext = e.currentTarget.dataset.bool
     playStore.dispatch('changeNewMusicAction', isNext)
-    // let index = this.data.currentMusicIndex
-    // if (isNext && this.data.playModeIndex !== 1) {
-    //   index = index + 1
-    //   if (index === this.data.playList.length) index = 0
-    // } else if(!isNext && this.data.playModeIndex !== 1) {
-    //   index = index - 1
-    //   if (index === -1 ) index = this.data.playList.length - 1
-    // } else if(this.data.playModeIndex === 1) {
-    //   index = this.data.currentMusicIndex
-    // }
-    // playStore.dispatch('playMusicSongIDAction', this.data.playList[index])
-    // playStore.setState('currentMusicIndex', index)
   },
 
   // 音乐模式切换
@@ -132,13 +121,6 @@ Page({
       playStore.onState('isPause', (isPause) => {
         this.setData({isPause})
       })
-
-      // 监听歌曲列表以及索引变化
-      // playStore.onStates(['playList', 'currentMusicIndex'], ({playList, currentMusicIndex}) => {
-      //   if (playList) this.setData({playList})
-      //   if (currentMusicIndex !== undefined) this.setData({currentMusicIndex})
-      //   console.log(this.data.currentMusicIndex)
-      // })
 
     },
 
