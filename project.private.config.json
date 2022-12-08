@@ -42,6 +42,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "用户登录",
+          "pathName": "pages/home-profile/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

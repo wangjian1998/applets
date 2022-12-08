@@ -27,7 +27,7 @@ Page({
   getSearchHotData: function() {
     getSearchHot().then(res => {
       this.setData({hotData: res.result.hots})
-      console.log(res)
+      // console.log(res)
     })
   },
 

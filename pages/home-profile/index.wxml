@@ -1,0 +1,4 @@
+<!--pages/home-profile/index.wxml-->
+<button open-type="getUserInfo" bindtap="login">登录</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="handlePhoneNumber">获取手机号</button>
+

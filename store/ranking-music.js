@@ -14,7 +14,7 @@ const hyEventStore = new HYEventStore({
     getRecommendSong(ctx) {
       getRankingData().then(res => {
         ctx.recommendSongList = res
-        console.log(res)
+        // console.log(res)
       })
     },
     async getDataRankingList(ctx) {

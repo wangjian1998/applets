@@ -8,7 +8,7 @@ export function getLoginCode() {
         resolve(code)
       },
       fail: (res) => {
-        console.log(res)
+        // console.log(res)
         reject(res)
       },
     })
@@ -31,6 +31,20 @@ export function checkSession() {
       },
       fail: (res) => {
         reject(false)
+      }
+    })
+  })
+}
+
+export function getUserInfo() {
+  return new Promise((resolve, reject) => {
+    wx.getUserProfile({
+      desc: '用户登录',
+      success: (result) => {
+        resolve(result)
+      },
+      fail: (res) => {
+        reject(res)
       }
     })
   })

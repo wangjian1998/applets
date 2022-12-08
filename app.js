@@ -2,7 +2,10 @@
 import {getLoginCode, sendCodeToServer, checkTokenTimeout, checkSession} from './service/api_login'
 App({
  onLaunch: async function() {
+   // 让用户默认进行登录
     this.handleLogin()
+
+    // 获取用户信息
  },
 
  async handleLogin() {
