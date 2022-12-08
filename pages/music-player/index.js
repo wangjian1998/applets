@@ -74,7 +74,7 @@ Page({
     // 计算需要播放的时间
     const needTime = this.data.playData.detailData[0].time * value/100
     // 设置context播放needTime位置的音乐
-    audioContext.pause()
+    // audioContext.pause()
     audioContext.seek(needTime / 1000)
     this.setData({sliderValue: value, isChanging: false})
   },

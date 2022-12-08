@@ -47,7 +47,7 @@
   </view>
 
   <!--播放工具栏-->
-  <view class="play-bar-placeholder"></view>
+  <view class="play-bar-placeholder" wx:if="{{currentSong.name}}"></view>
   <view class="play-bar" bindtap="handlePlayBarClick" wx:if="{{currentSong.name}}">
     <view class="left">
       <image class="album album-anmi"  style="animation-play-state: {{playAnmaState}}" mode="aspectFill" src="{{currentSong.picUrl}}"></image>

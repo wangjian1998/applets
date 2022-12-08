@@ -19,12 +19,12 @@ const playStore = new HYEventStore({
     playList: [], // 歌曲列表
     currentMusicIndex: 0, // 当前歌曲在歌曲列表中的索引
     isFirstPlay: true, // 是否第一次播放
-    title: ''
+    isStoping: false // 是否是停止状态
   },
   actions: {
     async playMusicSongIDAction(ctx, payload) {
       const {id, name, artists, album} = payload
-      if (ctx.id === id) return // 点击相同歌曲不重新播放
+      if (ctx.id === id && ctx.playModeIndex !== 1) return // 点击相同歌曲不重新播放
       ctx.id = id
       ctx.isPause = false
       ctx.playData = {}
@@ -78,6 +78,21 @@ const playStore = new HYEventStore({
       audioContext.onEnded(()=> {
         this.dispatch('changeNewMusicAction', true)
       })
+
+      // 监听音乐暂停/播放/停止
+      // 播放状态
+      audioContext.onPlay(() => {
+        ctx.isPause = false
+      })
+      // 暂停状态
+      audioContext.onPause(() => {
+        ctx.isPause = true
+      })
+      // 停止状态
+      audioContext.onStop(() => {
+        ctx.isPause = true
+        ctx.isStoping = true
+      })
     },
 
     // 更改播放模式
@@ -89,6 +104,11 @@ const playStore = new HYEventStore({
     // 歌曲暂停与继续播放
     changePauseMusicAction(ctx, isPause) {
       ctx.isPause = isPause
+      if(!ctx.isPause && ctx.isStoping) {
+        audioContext.src = ctx.playData.detailData[0].url
+        audioContext.title = ctx.playData.name
+        ctx.isStoping = false
+      }
       !ctx.isPause ? audioContext.play() : audioContext.pause()
     },
 
