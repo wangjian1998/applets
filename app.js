@@ -2,6 +2,10 @@
 import {getLoginCode, sendCodeToServer, checkTokenTimeout, checkSession} from './service/api_login'
 App({
  onLaunch: async function() {
+    this.handleLogin()
+ },
+
+ async handleLogin() {
    // 1. 让用户默认进行登录
    const token = wx.getStorageSync('token')
    // 2. 判断token是否过期
