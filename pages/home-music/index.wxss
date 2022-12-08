@@ -69,6 +69,10 @@ page {
 
 /**播放工具栏*/
 
+.play-bar-placeholder {
+  height: 44px;
+}
+
 .play-bar {
   position: fixed;
   display: flex;
