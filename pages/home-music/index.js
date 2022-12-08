@@ -18,7 +18,8 @@ Page({
     recommendSongMenuList: [],
     dianfengList: {0: {}, 2: {} ,3: {}}, // 巅峰榜单
     currentSong: {}, // 当前播放歌曲
-    isPause: false
+    isPause: false,
+    playAnmaState: 'running'
   },
 
   /**
@@ -152,12 +153,14 @@ Page({
 
   // ====================事件监听==============
   getCurrentSongListener() {
+    // 监听歌曲信息
     playStore.onState('playData', res => {
       this.setData({currentSong: res})
     })
 
+    // 监听是否播放
     playStore.onState('isPause', res => {
-      this.setData({isPause: res})
+      this.setData({isPause: res, playAnmaState: this.data.isPause ? 'running' : 'paused'})
     })
   },
 

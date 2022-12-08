@@ -114,3 +114,18 @@ page {
   height: 25px;
   margin-right: 10px;
 }
+
+@keyframes albumRotate {
+from {
+  transform: rotate(0 deg);
+ }
+
+ to {
+   transform: rotate(360deg);
+ }
+
+}
+
+.album-anmi{
+  animation: albumRotate 16s linear infinite;
+}
