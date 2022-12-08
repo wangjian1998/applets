@@ -160,7 +160,7 @@ Page({
 
     // 监听是否播放
     playStore.onState('isPause', res => {
-      this.setData({isPause: res, playAnmaState: this.data.isPause ? 'running' : 'paused'})
+      this.setData({isPause: res, playAnmaState: res ? 'paused' : 'running'})
     })
   },
 

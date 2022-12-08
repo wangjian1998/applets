@@ -2,7 +2,9 @@ import {HYEventStore} from 'hy-event-store'
 import {parseLyric} from '../utils/parseLyric'
 import {getSongDetail, getLyric} from '../service/api_music'
 
-const audioContext = wx.createInnerAudioContext()
+// const audioContext = wx.createInnerAudioContext()
+
+const audioContext = wx.getBackgroundAudioManager() // 使用后台播放
 
 const playStore = new HYEventStore({
   state: {
@@ -16,7 +18,8 @@ const playStore = new HYEventStore({
     isPause: false, // 是否暂停
     playList: [], // 歌曲列表
     currentMusicIndex: 0, // 当前歌曲在歌曲列表中的索引
-    isFirstPlay: true // 是否第一次播放
+    isFirstPlay: true, // 是否第一次播放
+    title: ''
   },
   actions: {
     async playMusicSongIDAction(ctx, payload) {
@@ -38,6 +41,7 @@ const playStore = new HYEventStore({
       // 播放歌曲
       audioContext.stop()
       audioContext.src = ctx.playData.detailData[0].url
+      audioContext.title = name
       audioContext.autoplay = true // 自动播放
       // 监听audiocontext的一些事件
       if (ctx.isFirstPlay) {

@@ -13,6 +13,7 @@
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle": "black"
   },
+  "requireBackgroundModes": ["audio"], 
   "tabBar": {
     "list": [
       {
